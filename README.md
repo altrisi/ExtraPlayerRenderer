@@ -1,5 +1,16 @@
 # Extra Player Renderer
 
+---
+This mod is only made for personal interests and friends' requirements, so I may not adopt your suggestions or fix bugs.
+
+这个模组仅出于个人爱好和朋友需求制作，因此我可能不会采用你的点子或修复 bug。
+
+If you REALLY want your idea to be heard, gimme pull requests.
+
+如果你**非常**想让我看到你的点子，去 Github 提交代码。
+
+---
+
 ![](logo.png)
 
 Render a player entity on the bottom left corner of the screen.
