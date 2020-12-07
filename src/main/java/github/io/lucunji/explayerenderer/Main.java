@@ -1,11 +1,12 @@
 package github.io.lucunji.explayerenderer;
 
 import fi.dy.masa.malilib.config.ConfigManager;
+import fi.dy.masa.malilib.event.InputEventHandler;
+import fi.dy.masa.malilib.hotkeys.IKeybindManager;
+import fi.dy.masa.malilib.hotkeys.IKeybindProvider;
 import github.io.lucunji.explayerenderer.config.ConfigHandler;
 import github.io.lucunji.explayerenderer.config.Configs;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.impl.client.keybinding.KeyBindingRegistryImpl;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 
@@ -23,7 +24,20 @@ public class Main implements ModInitializer{
         ConfigManager.getInstance().registerConfigHandler(MOD_ID, new ConfigHandler());
         new Configs();
         ConfigHandler.loadFile();
-        KeyBindingRegistryImpl.registerKeyBinding(MASTER_CONTROL);
-        ClientTickEvents.START_CLIENT_TICK.register(new KeyBindHandler());
+        InputEventHandler.getKeybindManager().registerKeybindProvider(new KeybindProvider());
+        Configs.MENU_OPEN_KEY.getKeybind().setCallback(new KeyBindHandler());
+    }
+
+    public static class KeybindProvider implements IKeybindProvider {
+
+        @Override
+        public void addKeysToMap(IKeybindManager manager) {
+            manager.addKeybindToMap(Configs.MENU_OPEN_KEY.getKeybind());
+        }
+
+        @Override
+        public void addHotkeys(IKeybindManager manager) {
+            // Not necessary
+        }
     }
 }
