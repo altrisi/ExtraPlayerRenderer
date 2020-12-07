@@ -8,9 +8,13 @@ import net.minecraft.client.MinecraftClient;
 
 public class KeyBindHandler implements IHotkeyCallback {
 
-	@Override
-	public boolean onKeyAction(KeyAction action, IKeybind key) {
-		MinecraftClient.getInstance().openScreen(new GuiConfig());
-		return true;
-	}
+    @Override
+    public boolean onKeyAction(KeyAction action, IKeybind key) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.currentScreen instanceof GuiConfig)
+            client.currentScreen.onClose();
+        else
+            client.openScreen(new GuiConfig());
+        return true;
+    }
 }
